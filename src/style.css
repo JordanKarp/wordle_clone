@@ -1,0 +1,5 @@
+#game {
+    border: 1px solid red;
+    display: grid;
+    place-items: center;
+}
