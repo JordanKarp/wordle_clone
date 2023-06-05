@@ -23,6 +23,30 @@ body {
     height: 72vh;
 }
 
+
+#alphabet {
+    color: white;
+    display: inline-block;
+    width: 100%;
+
+}
+
+.keyboard {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(26, auto);
+}
+
+.alphaletter {
+    list-style-type: none;
+    float: left;
+    margin-left: 10px;
+    text-transform: uppercase;
+
+
+
+}
+
 .title {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -61,6 +85,18 @@ body {
 
 .box.right {
     background-color: var(--right);
+}
+
+.alphaletter.empty {
+    color: var(--empty);
+}
+
+.alphaletter.wrong {
+    color: var(--wrong);
+}
+
+.alphaletter.right {
+    color: var(--right);
 }
 
 .animated {

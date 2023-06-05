@@ -7,33 +7,15 @@ const state = {
     currentCol: 0,
 };
 
-
 const dictionary = []
 fetch('5_letter_words.txt')
     .then(r => r.text())
     .then(t => dictionary.push(...t.split('\n')))
     .then(d => choose_wordle_word())
-// console.log(dictionary)
-// const dictionary = [
-//     'earth',
-//     'plane',
-//     'water',
-//     'homes',
-//     'train',
-//     'blitz',
-//     'phone',
-// ]
-// const state = {
-//     secret: '',
-//     grid: Array(6)
-//         .fill()
-//         .map(() => Array(5).fill('')),
-//     currentRow: 0,
-//     currentCol: 0,
-// };
 
 function choose_wordle_word() {
     state.secret = dictionary[Math.floor(Math.random() * dictionary.length)]
+    console.log(state.secret)
 }
 
 function updateGrid() {
@@ -66,6 +48,25 @@ function drawGrid(game) {
     game.appendChild(grid);
 }
 
+
+function drawKeyboard(alphabet) {
+    const allLetters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+    const keyboard = document.createElement('ul');
+    keyboard.className = "keyboard";
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 13; j++) {
+            let alpha = document.createElement('li')
+            let lett = allLetters[i * 13 + j]
+            alpha.className = 'alphaletter'
+            alpha.id = `alpha-${lett}`;
+            alpha.textContent = lett
+            keyboard.appendChild(alpha)
+        }
+    }
+    alphabet.appendChild(keyboard)
+
+}
 function registerKeyboardEvents() {
     document.body.onkeydown = (e) => {
         const { key } = e;
@@ -104,14 +105,19 @@ function revealWord(word) {
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box${row}${i}`);
         const letter = box.textContent;
+        const alpha = document.getElementById(`alpha-${letter}`);
+
 
         setTimeout(() => {
             if (letter === state.secret[i]) {
                 box.classList.add("right");
+                alpha.classList.add('right');
             } else if (state.secret.includes(letter)) {
                 box.classList.add('wrong');
+                alpha.classList.add('right');
             } else {
                 box.classList.add('empty');
+                alpha.classList.add('empty')
             }
         }, ((i + 1) * animationDuration) / 2);
 
@@ -144,7 +150,7 @@ function addLetter(letter) {
     state.currentCol++;
 }
 
-function removeLetter(letter) {
+function removeLetter() {
     if (state.currentCol === 0) {
         return;
     }
@@ -154,7 +160,10 @@ function removeLetter(letter) {
 
 function start() {
     const game = document.getElementById('game');
+    const alphabet = document.getElementById('alphabet');
+
     drawGrid(game);
+    drawKeyboard(alphabet);
     registerKeyboardEvents();
 }
 
