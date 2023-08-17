@@ -1,8 +1,13 @@
+
+const numOfLetters = 5;
+const numOfGuesses = 6;
+document.documentElement.style.setProperty(`--word_length`, numOfLetters);
+
 const state = {
     secret: '',
-    grid: Array(6)
+    grid: Array(numOfGuesses)
         .fill()
-        .map(() => Array(5).fill('')),
+        .map(() => Array(numOfLetters).fill('')),
     currentRow: 0,
     currentCol: 0,
 };
@@ -15,7 +20,7 @@ fetch('5_letter_words.txt')
 
 function choose_wordle_word() {
     state.secret = dictionary[Math.floor(Math.random() * dictionary.length)]
-    console.log(state.secret)
+    // console.log(state.secret)
 }
 
 function updateGrid() {
@@ -40,8 +45,8 @@ function drawGrid(game) {
     const grid = document.createElement('div');
     grid.className = "grid";
 
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 5; j++) {
+    for (let i = 0; i < numOfGuesses; i++) {
+        for (let j = 0; j < numOfLetters; j++) {
             drawBox(grid, i, j);
         }
     }
@@ -54,15 +59,13 @@ function drawKeyboard(alphabet) {
     const keyboard = document.createElement('ul');
     keyboard.className = "keyboard";
 
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 13; j++) {
-            let alpha = document.createElement('li')
-            let lett = allLetters[i * 13 + j]
-            alpha.className = 'alphaletter'
-            alpha.id = `alpha-${lett}`;
-            alpha.textContent = lett
-            keyboard.appendChild(alpha)
-        }
+    for (let i = 0; i < 26; i++) {
+        let alpha = document.createElement('li')
+        let lett = allLetters[i]
+        alpha.className = 'alphaletter'
+        alpha.id = `alpha-${lett}`;
+        alpha.textContent = lett
+        keyboard.appendChild(alpha)
     }
     alphabet.appendChild(keyboard)
 
@@ -70,14 +73,14 @@ function drawKeyboard(alphabet) {
 function registerKeyboardEvents() {
     document.body.onkeydown = (e) => {
         const { key } = e;
-        if (key === 'Enter' && state.currentCol == 5) {
+        if (key === 'Enter' && state.currentCol == numOfLetters) {
             const word = getCurrentWord();
             if (isWordValid(word)) {
                 revealWord(word);
                 state.currentRow++
                 state.currentCol = 0
             } else {
-                alert(`${word} is not a valid word.`)
+                alert(`${word.toUpperCase()} is not a valid word.`)
             }
         }
         if (key === 'Backspace') {
@@ -102,7 +105,7 @@ function revealWord(word) {
     const row = state.currentRow;
     const animationDuration = 300
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < numOfLetters; i++) {
         const box = document.getElementById(`box${row}${i}`);
         const letter = box.textContent;
         const alpha = document.getElementById(`alpha-${letter}`);
@@ -126,13 +129,13 @@ function revealWord(word) {
     }
 
     const isWinner = state.secret === word;
-    const isGameOver = state.currentRow === 5;
+    const isGameOver = state.currentRow === numOfLetters;
 
     setTimeout(() => {
         if (isWinner) {
             alert('You win!')
         } else if (isGameOver) {
-            alert('Game over! The word was ' + state.secret)
+            alert('Game over! The word was ' + state.secret.toUpperCase())
         }
     }, 3 * animationDuration);
 }
@@ -143,7 +146,7 @@ function isLetter(key) {
 }
 
 function addLetter(letter) {
-    if (state.currentCol === 5) {
+    if (state.currentCol === numOfLetters) {
         return;
     }
     state.grid[state.currentRow][state.currentCol] = letter;
