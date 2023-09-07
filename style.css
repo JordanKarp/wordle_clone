@@ -29,7 +29,9 @@ footer {
 #bodyContainer {
     background-color: rgb(93, 93, 93);
     border-radius: 1rem;
-    max-width: 1280px;
+    max-width: 800px;
+    padding: 1rem;
+    align-self: center;
 }
 
 .keyboard {
