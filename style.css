@@ -17,6 +17,7 @@ body,
 footer {
     background-color: var(--default-background);
     color: white;
+    display: flex;
 }
 
 
@@ -110,6 +111,7 @@ footer {
 #footer {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 @keyframes flip {
