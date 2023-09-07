@@ -6,7 +6,7 @@
 :root {
     --default-background: #121213;
     --empty: #3a3a3c;
-    --wrong: #ff0150;
+    --wrong: #ffd501;
     --right: #538d4e;
     --chances: 6;
     --word_length: 5;
