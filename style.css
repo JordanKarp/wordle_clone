@@ -22,6 +22,11 @@ body {
     width: 100%;
 }
 
+#bodyContainer {
+    background-color: grey;
+    border-radius: 1rem;
+}
+
 .keyboard {
     color: white;
     display: grid;
@@ -93,6 +98,11 @@ body {
 
 .animated {
     animation: flip 0.5s ease-in-out;
+}
+
+footer {
+    display: flex;
+    align-items: center;
 }
 
 @keyframes flip {
