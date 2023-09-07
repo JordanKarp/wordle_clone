@@ -112,7 +112,7 @@ a {
 }
 
 #footer p {
-    margin: 0 auto;
+    text-align: center;
 }
 
 @keyframes flip {
