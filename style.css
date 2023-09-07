@@ -23,8 +23,9 @@ body {
 }
 
 #bodyContainer {
-    background-color: grey;
+    background-color: rgb(93, 93, 93);
     border-radius: 1rem;
+    max-width: 1280;
 }
 
 .keyboard {
