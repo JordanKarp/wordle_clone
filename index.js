@@ -65,10 +65,6 @@ function drawKeyboard(alphabet) {
         alpha.className = 'alphaletter'
         alpha.id = `alpha-${lett}`;
         alpha.textContent = lett
-
-        alpha.addEventListener('touchend',(() => {addLetter(lett)}));
-
-
         keyboard.appendChild(alpha)
     }
     alphabet.appendChild(keyboard)
