@@ -46,12 +46,8 @@ a {
 
 .alphaletter {
     list-style-type: none;
-    float: left;
-    margin: 2rem .25rem;
     text-transform: uppercase;
-    font-family: sans-serif;
     font-size: 1.25rem;
-
 }
 
 #title {
@@ -113,8 +109,20 @@ a {
 
 #btns {
     text-align: center;
-
+    padding: 1rem;
+    border-radius: 10px;
 }
+
+#btns button {
+    padding: .5rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+#btns button:hover {
+    background-color: var(--default-background);
+    color: white;
+}
+
 
 #footer p {
     text-align: center;
