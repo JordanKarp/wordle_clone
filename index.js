@@ -181,6 +181,7 @@ function start() {
     drawKeyboard(alphabet);
     drawNewGameButton(btns)
     registerKeyboardEvents();
+    prompt();
 }
 
 start()
