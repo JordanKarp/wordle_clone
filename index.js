@@ -70,11 +70,13 @@ function drawKeyboard(alphabet) {
     alphabet.appendChild(keyboard)
 }
 
-function drawNewGameButton() {
+function drawNewGameButton(btns) {
     const newGameBtn = document.createElement('button')
     newGameBtn.className = 'newGameBtn'
     newGameBtn.innerText = 'New Game'
     newGameBtn.addEventListener('click',(() => document.location.reload()))
+
+    btns.append(newGameBtn)
 }
 
 function registerKeyboardEvents() {
@@ -173,10 +175,11 @@ function removeLetter() {
 function start() {
     const game = document.getElementById('game');
     const alphabet = document.getElementById('alphabet');
+    const btns = document.getElementById('btns');
 
     drawGrid(game);
     drawKeyboard(alphabet);
-    drawNewGameButton()
+    drawNewGameButton(btns)
     registerKeyboardEvents();
 }
 
