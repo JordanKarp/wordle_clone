@@ -68,8 +68,15 @@ function drawKeyboard(alphabet) {
         keyboard.appendChild(alpha)
     }
     alphabet.appendChild(keyboard)
-
 }
+
+function drawNewGameButton() {
+    const newGameBtn = document.createElement('button')
+    newGameBtn.className = 'newGameBtn'
+    newGameBtn.innerText = 'New Game'
+    newGameBtn.addEventListener('click',(() => document.location.reload()))
+}
+
 function registerKeyboardEvents() {
     document.body.onkeydown = (e) => {
         const { key } = e;
@@ -134,8 +141,10 @@ function revealWord(word) {
     setTimeout(() => {
         if (isWinner) {
             alert('You win!')
+            document.location.reload()
         } else if (isGameOver) {
             alert('Game over! The word was ' + state.secret.toUpperCase())
+            document.location.reload()
         }
     }, 3 * animationDuration);
 }
@@ -167,6 +176,7 @@ function start() {
 
     drawGrid(game);
     drawKeyboard(alphabet);
+    drawNewGameButton()
     registerKeyboardEvents();
 }
 
